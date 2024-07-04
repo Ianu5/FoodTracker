@@ -28,6 +28,16 @@ class User:
         return int(basal_rate * PAL)
 
 
+"""
+TODO
+==============PROBLEM TLDR CHANGE DATA FORMAT TO DICT AND CONTAINS METHOD===========
+As the json file is in list format python allows for duplicate elements
+I should change it to a dictionary formatting to ensure only one user with
+his username exists.
+When I do that I need to change the contains dunder method to support the change
+of formatting.
+DISPLAY METHOD NEEDS TO BE CHANGED AS WELL
+"""
 class UserDatabank:
     """
     This class initiates a json file for the storage of the user
@@ -37,8 +47,9 @@ class UserDatabank:
     # Set the name and filepath of the Databank
     filename = "UserDatabank.json"
     directory = os.getcwd()
-    folder = 'UserData'
-    filepath = os.path.join(directory, filename)
+    folder = "UserData"
+    dir_path = os.path.join(directory, folder)
+    filepath = os.path.join(directory, folder, filename)
 
     def __init__(self):
         self.filepath = UserDatabank.filepath
@@ -49,7 +60,8 @@ class UserDatabank:
             with open(self.filepath, 'r') as f:
                 self.data = json.load(f)
         else:
-            self.data = []
+            os.makedirs(self.dir_path)
+            self.data = [] #!!!!!!!!!!!!!!!!! TODO
 
     def get_user_information(self, username):
         required_information = (
@@ -68,7 +80,6 @@ class UserDatabank:
                     for element in required_information
                 }
         }
-
         return user
 
     def add_user(self):
@@ -86,10 +97,11 @@ class UserDatabank:
             f.write(json_string)
         return None
 
-    def __contains__(self, username):
+    def __contains__(self, username): #!!!!!!!!!!!!!!!!!!! TODO
         return next((element for element in self.data 
                     if username in element.keys()), None)
-        #return user
     
-    #def __contains__(self, username):
-    #    return username in self.data.keys()
+    def display_user_information(self, username): #!!!!!!!!!!!!!!!! TODO
+        user_information = next((user for user in self.data
+                            if username in user.keys()), None)
+        print(user_information)

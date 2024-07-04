@@ -21,10 +21,8 @@ def main():
     userdb = UserDatabankClass.UserDatabank()
     username = input('Your username: ')
 
-    if not username in userdb:
-        userdb.add_user()
+    userdb.display_user_information(username)
 
-    print(username in userdb)
 
 if __name__ == "__main__":
     main()
