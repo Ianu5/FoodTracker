@@ -21,6 +21,7 @@ class CSVHandler:
                                      self.filename)
 
         # If the file does not exist download it into the food_databank folder
+        # Using openfoodfacts python sdk for downloading the file
         self.download_path = Path('./food_databank')
         if not os.path.exists(self.filepath):
             self.dataset = openfoodfacts.ProductDataset(dataset_type='csv',

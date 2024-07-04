@@ -37,6 +37,7 @@ class UserDatabank:
     # Set the name and filepath of the Databank
     filename = "UserDatabank.json"
     directory = os.getcwd()
+    folder = 'UserData'
     filepath = os.path.join(directory, filename)
 
     def __init__(self):
@@ -73,7 +74,7 @@ class UserDatabank:
     def add_user(self):
         username = input("Choose username: ")
 
-        if self.search_user(username):
+        if username in self.data:
             print("Username taken choose another")
             self.add_user()
             
@@ -85,8 +86,10 @@ class UserDatabank:
             f.write(json_string)
         return None
 
-    def search_user(self, username):
-        user = next((element for element in self.data 
+    def __contains__(self, username):
+        return next((element for element in self.data 
                     if username in element.keys()), None)
-        return user
+        #return user
     
+    #def __contains__(self, username):
+    #    return username in self.data.keys()
