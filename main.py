@@ -18,11 +18,17 @@ FIELDS = [
     ]
 
 def main():
+    """
     userdb = UserDatabankClass.UserDatabank()
     username = input('Your username: ')
 
     userdb.display_user_information(username)
+    """
 
+    userdb = UserDatabankClass.UserDatabank()
+    userdb.add_user()
+
+    userdb.display_user_information(input('username: '))
 
 if __name__ == "__main__":
     main()

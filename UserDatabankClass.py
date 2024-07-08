@@ -28,16 +28,6 @@ class User:
         return int(basal_rate * PAL)
 
 
-"""
-TODO
-==============PROBLEM TLDR CHANGE DATA FORMAT TO DICT AND CONTAINS METHOD===========
-As the json file is in list format python allows for duplicate elements
-I should change it to a dictionary formatting to ensure only one user with
-his username exists.
-When I do that I need to change the contains dunder method to support the change
-of formatting.
-DISPLAY METHOD NEEDS TO BE CHANGED AS WELL
-"""
 class UserDatabank:
     """
     This class initiates a json file for the storage of the user
@@ -61,9 +51,9 @@ class UserDatabank:
                 self.data = json.load(f)
         else:
             os.makedirs(self.dir_path)
-            self.data = [] #!!!!!!!!!!!!!!!!! TODO
+            self.data = {} #!!!!!!!!!!!!!!!!! TODO
 
-    def get_user_information(self, username):
+    def get_user_information(self):
         required_information = (
             'first_name',
             'last_name',
@@ -75,33 +65,27 @@ class UserDatabank:
             )
     
         user = {
-            username: {
                 element: input(f'{element.replace('_', ' ')}: ') 
                     for element in required_information
                 }
-        }
         return user
 
     def add_user(self):
         username = input("Choose username: ")
 
-        if username in self.data:
+        if username in self.data.keys():
             print("Username taken choose another")
             self.add_user()
+            return None
             
-        new_user = self.get_user_information(username)
-        self.data.append(new_user)
+        self.data[username] = self.get_user_information()
         json_string = json.dumps(self.data, indent=4)
 
         with open(self.filepath, 'w') as f:
             f.write(json_string)
         return None
 
-    def __contains__(self, username): #!!!!!!!!!!!!!!!!!!! TODO
-        return next((element for element in self.data 
-                    if username in element.keys()), None)
-    
-    def display_user_information(self, username): #!!!!!!!!!!!!!!!! TODO
-        user_information = next((user for user in self.data
-                            if username in user.keys()), None)
+    def display_user_information(self, username):
+        if username in self.data.keys():
+            user_information = {key: value for key, value in self.data[username].items()}
         print(user_information)
