@@ -48,6 +48,7 @@ class EntryMenu(Menu):
             case '4':
                 sys.exit("Exiting the program")
 
+
 class UserMenu(Menu):
     options = ("Search food", "Enter food eaten", "Display eating history", "Add recipie")
     def __init__(self):
