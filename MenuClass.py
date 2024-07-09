@@ -37,6 +37,10 @@ class EntryMenu(Menu):
         match self.choice:
             case '1':
                 userdatabank.show_users()
+                users = userdatabank.return_users()
+                choice = int(input("Choose: "))
+                if 1 <= choice <= len(users):
+                    print(users[choice - 1])
             case '2':
                 userdatabank.add_user()
             case '3':
