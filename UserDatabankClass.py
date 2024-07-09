@@ -44,6 +44,7 @@ class UserDatabank:
     def __init__(self):
         self.filepath = UserDatabank.filepath
 
+        # check if the file exists and initialize the datastructure
         if (os.path.exists(self.filepath)
             and os.path.isfile(self.filepath)
             and self.filepath.endswith(".json")):
@@ -51,9 +52,10 @@ class UserDatabank:
                 self.data = json.load(f)
         else:
             os.makedirs(self.dir_path)
-            self.data = {} #!!!!!!!!!!!!!!!!! TODO
+            self.data = {}
 
-    def get_user_information(self):
+    def prompt_user_information(self):
+        # List with the information needed
         required_information = (
             'first_name',
             'last_name',
@@ -64,6 +66,8 @@ class UserDatabank:
             'pal'
             )
     
+        # Prompting the user for each element in the tuple and putting it 
+        # in a dictionary
         user = {
                 element: input(f'{element.replace('_', ' ')}: ') 
                     for element in required_information
@@ -71,21 +75,49 @@ class UserDatabank:
         return user
 
     def add_user(self):
+        # Prompting the user for a username
         username = input("Choose username: ")
 
+        # Check if the username already exists
         if username in self.data.keys():
             print("Username taken choose another")
             self.add_user()
             return None
-            
-        self.data[username] = self.get_user_information()
-        json_string = json.dumps(self.data, indent=4)
 
+        # Get all required data            
+        self.data[username] = self.prompt_user_information()
+
+        # Save the data to our json file
+        json_string = json.dumps(self.data, indent=4)
         with open(self.filepath, 'w') as f:
             f.write(json_string)
         return None
 
+    def delete_user(self):
+        # showing which users exist
+        self.show_users()
+        username = input("Input the username you want to delete: ")
+        # Check if the username exist in our Databank
+        # and delete it if we find it
+        if username in self.data.keys():
+            del self.data[username]
+            print("Successfully deleted the user")
+        
+       # Saving the changes in the file 
+        json_string = json.dumps(self.data, indent=4)
+        with open(self.filepath, 'w') as f:
+            f.write(json_string)
+
     def display_user_information(self, username):
+        # Function to display all the information about one user
         if username in self.data.keys():
             user_information = {key: value for key, value in self.data[username].items()}
         print(user_information)
+        return None
+
+    def show_users(self):
+        # Printing all users that exist in our databank
+        users = [user for user in self.data.keys()]
+        for num, user in enumerate(users, start=1):
+            print(num, user)
+        return None

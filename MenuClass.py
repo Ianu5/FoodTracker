@@ -1,3 +1,7 @@
+from UserDatabankClass import *
+import sys
+
+
 class Menu:
     def __init__(self, *options):
         self.options = options
@@ -19,7 +23,7 @@ class Menu:
 
 
 class EntryMenu(Menu):
-    options = ("Choose user", "Add user", "Delete user", "exit")
+    options = ("Choose user", "Add user", "Delete user", "Exit")
     def __init__(self):
         self.options = EntryMenu.options
 
@@ -29,6 +33,16 @@ class EntryMenu(Menu):
     def set_choice(self):
         return super().set_choice()
         
+    def handle_choice(self, userdatabank: UserDatabank):
+        match self.choice:
+            case '1':
+                userdatabank.show_users()
+            case '2':
+                userdatabank.add_user()
+            case '3':
+                userdatabank.delete_user()
+            case '4':
+                sys.exit("Exiting the program")
 
 class UserMenu(Menu):
     options = ("Search food", "Enter food eaten", "Display eating history", "Add recipie")
