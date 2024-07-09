@@ -1,34 +1,15 @@
 import UserDatabankClass
 import CSVHandler
-
-FIELDS = [
-    'code',
-    'url',
-    'product_name',
-    'abbreviated_product_name',
-    'generic_name',
-    'quantity',
-    'brands',
-    'energy-kj_100g',
-    'energy-kcal_100g',
-    'energy_100g',
-    'unsaturated-fat_100g',
-    'carbohydrates_100g',
-    'sugars_100g',
-    ]
+from MenuClass import *
 
 def main():
-    """
-    userdb = UserDatabankClass.UserDatabank()
-    username = input('Your username: ')
-
-    userdb.display_user_information(username)
-    """
-
-    userdb = UserDatabankClass.UserDatabank()
-    userdb.add_user()
-
-    userdb.display_user_information(input('username: '))
+    food_databank = CSVHandler.CSVHandler()
+    user_databank = UserDatabankClass.UserDatabank()
+    menu = EntryMenu()
+    while True:
+        menu.display()
+        menu.set_choice()
+        menu.handle_choice(user_databank)
 
 if __name__ == "__main__":
     main()
