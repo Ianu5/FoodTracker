@@ -69,7 +69,7 @@ class UserDatabank:
         # Prompting the user for each element in the tuple and putting it 
         # in a dictionary
         user = {
-                element: input(f'{element.replace('_', ' ')}: ') 
+                element: input(f'{element}: ') 
                     for element in required_information
                 }
         return user
