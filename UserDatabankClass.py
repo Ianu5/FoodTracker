@@ -121,3 +121,6 @@ class UserDatabank:
         for num, user in enumerate(users, start=1):
             print(num, user)
         return None
+    
+    def return_users(self):
+        return [user for user in self.data.keys()]
