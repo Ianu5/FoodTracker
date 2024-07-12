@@ -1,9 +1,9 @@
 import UserDatabankClass
-import CSVHandler
+import FoodDataBankClass
 from MenuClass import *
 
 def main():
-    food_databank = CSVHandler.CSVHandler()
+    food_databank = FoodDataBankClass.CSVHandler()
     user_databank = UserDatabankClass.UserDatabank()
     menu = EntryMenu()
     while True:
