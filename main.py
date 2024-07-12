@@ -3,7 +3,7 @@ import FoodDataBankClass
 from MenuClass import *
 
 def main():
-    food_databank = FoodDataBankClass.CSVHandler()
+    food_databank = FoodDataBankClass.FoodData()
     user_databank = UserDatabankClass.UserDatabank()
     menu = EntryMenu()
     while True:
