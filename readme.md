@@ -56,6 +56,7 @@ Normal known foods shall be taken from a food databank such as openfoodfacts.
 ### Dependencies
 python 3.12.3
 openfoodfacts 0.3.0
+pandas 2.2.2
 mongodb or csv
 
 graphical interface like tkinter?
