@@ -1,6 +1,9 @@
 from UserDatabankClass import *
 import sys
+import openfoodfacts
+import FoodDataBankClass
 
+FOOD_DATA = FoodDataBankClass.FoodData()
 
 class Menu:
     """Base Menu class for usage in more elaborate menus"""
@@ -90,8 +93,15 @@ class UserMenu(Menu):
     def handle_choice(self):
         match self.choice:
             case '1':
+                search_by_choices = FOOD_DATA.fields[0:5:2]
+                print("Search by:\n")
+                for num, choice in enumerate(search_by_choices, start=1):
+                    print(num, choice)
+                choice = input("Please enter a selection: ")
+                match choice:
+                    case '1':
+                        FOOD_DATA.search_food(input(f"Enter your {search_by_choices[int(choice) - 1]}: "), search_by_choices[int(choice) - 1])
                 # TODO write a class for food info handling
-                ...
             case '2':
                 # TODO write a class for tracking eaten calories
                 ...
