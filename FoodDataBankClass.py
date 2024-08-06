@@ -9,19 +9,20 @@ import pickle
 class FoodCSV:
     """This class's function is to download the CSV file from the openfood
     facts resources and check if the file exists"""
-    directory = os.getcwd()
-    folder = 'food_databank'
-    filename = 'en.openfoodfacts.org.products.csv.gz'
-    filepath = os.path.join(directory, folder, filename)
-    downloadpath = Path('./food_databank')
+    def __init__(self):
+        self.directory = os.getcwd()
+        self.folder = 'food_databank'
+        self.filename = 'en.openfoodfacts.org.products.csv.gz'
+        self.filepath = os.path.join(self.directory, self.folder, self.filename)
+        self.downloadpath = Path('./food_databank')
 
-    def download_csv():
-        if not os.path.exists(FoodCSV.filepath):
+    def download_csv(self):
+        if not os.path.exists(self.filepath):
             openfoodfacts.ProductDataset(dataset_type='csv',
-                                        cache_dir=FoodCSV.downloadpath)
+                                        cache_dir=self.downloadpath)
 
-    def __bool__():
-        return os.path.exists(FoodCSV.filepath)
+    def __bool__(self):
+        return os.path.exists(self.filepath)
 
 
 class FoodData:
@@ -54,7 +55,7 @@ class FoodData:
             self.csv_data.download_csv()
         chunk_size = 100000
         datachunk_list = []
-        for chunk in pandas.read_csv(self.csv_data,
+        for chunk in pandas.read_csv(self.csv_data.filepath,
                                      low_memory=False,
                                      sep='\t',
                                      compression='gzip',
@@ -63,6 +64,7 @@ class FoodData:
                                      usecols=self.fields):
             datachunk_list.append(chunk)
         dataframe = pandas.concat(datachunk_list)
+        dataframe.dropna(subset=['energy_100g'], inplace=True)
         with open(self.filepath, 'wb') as file:
             pickle.dump(dataframe, file, protocol=pickle.HIGHEST_PROTOCOL)
             print("Food Data successfully imported")
