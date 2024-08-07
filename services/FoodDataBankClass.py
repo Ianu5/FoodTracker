@@ -11,7 +11,7 @@ class FoodCSV:
     facts resources and check if the file exists"""
     def __init__(self):
         self.directory = os.getcwd()
-        self.folder = 'food_databank'
+        self.folder = 'data'
         self.filename = 'en.openfoodfacts.org.products.csv.gz'
         self.filepath = os.path.join(self.directory, self.folder, self.filename)
         self.downloadpath = Path('./food_databank')
