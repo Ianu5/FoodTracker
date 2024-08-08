@@ -1,5 +1,4 @@
 import os
-import Path
 
 # TODO I need to give those file locations callabe and unique variables
 # so I can use them in the main application

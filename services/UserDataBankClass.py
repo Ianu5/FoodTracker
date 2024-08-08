@@ -37,7 +37,7 @@ class UserDatabank:
     # Set the name and filepath of the Databank
     filename = "UserDatabank.json"
     directory = os.getcwd()
-    folder = "UserData"
+    folder = "data"
     dir_path = os.path.join(directory, folder)
     filepath = os.path.join(directory, folder, filename)
 

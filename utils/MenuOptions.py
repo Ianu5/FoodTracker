@@ -1,3 +1,4 @@
+
 main_menu_options = [
     {'description': 'Choose user', 'action': users_menu},
     {'description': 'Add user', 'action': add_user},

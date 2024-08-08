@@ -36,11 +36,11 @@ class Menu:
     def run(self):
         while True:
             self.display()
-            choice = self.execute_choice()
+            choice = self.get_choice()
             if not self.execute_choice(choice):
                 break
 
-
+""" These options are saved in utils for use in the main program
 main_menu_options = [
     {'description': 'Choose user', 'action': users_menu},
     {'description': 'Add user', 'action': add_user},
@@ -53,3 +53,4 @@ calorie_app_menu_options = [
     {'description': 'Display history', 'action': display_history},
     {'description': 'Recipes', 'action': recipe_menu}
     ]
+"""
