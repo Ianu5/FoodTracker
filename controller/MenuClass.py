@@ -34,23 +34,13 @@ class Menu:
             return True
 
     def run(self):
-        while True:
-            self.display()
-            choice = self.get_choice()
-            if not self.execute_choice(choice):
-                break
+        self.display()
+        choice = self.get_choice()
+        return self.execute_choice(choice)
+            
 
-""" These options are saved in utils for use in the main program
-main_menu_options = [
-    {'description': 'Choose user', 'action': users_menu},
-    {'description': 'Add user', 'action': add_user},
-    {'description': 'Delete user', 'action': delete_user}
-    ]
-
-calorie_app_menu_options = [
-    {'description': 'Search food', 'action': search_food},
-    {'description': 'Track calories', 'action': track_food},
-    {'description': 'Display history', 'action': display_history},
-    {'description': 'Recipes', 'action': recipe_menu}
-    ]
-"""
+class ChooseUserMenu(Menu):
+    def __init__(self, title, options: list, user):
+        super().__init__(title, options)
+        self.user = user
+    
